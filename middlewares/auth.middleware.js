@@ -1,6 +1,7 @@
 const Admin = require("../models/Admin")
+const bcrypt = require('bcrypt')
 
-function auth(req, res, next) {
+async function auth(req, res, next) {
   const login = req.body.login
   const password = req.body.password
 
@@ -10,15 +11,23 @@ function auth(req, res, next) {
     })
   }
 
-  const candidate = await Admin.findOne({ login, password })
+  const candidate = await Admin.findOne({ login })
 
   if (!candidate) {
     return res.status(401).json({
-      message: "Authentication is required"
+      message: "Admin is not found"
     })
   }
 
-  return res.json({ admin: candidate })
+  const comparison = bcrypt.compareSync(password, candidate.password)
+
+  if (!comparison) {
+    return res.status(401).json({
+      message: "Admin is not found"
+    })
+  }
+
+  next()
 }
 
 module.exports = auth
