@@ -20,3 +20,5 @@ function auth(req, res, next) {
 
   return res.json({ admin: candidate })
 }
+
+module.exports = auth
