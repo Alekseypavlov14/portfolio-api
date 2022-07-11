@@ -9,6 +9,12 @@ const URI = process.env.URI
 
 app.use(cors())
 
+app.get('/', (req, res) => {
+  res.json({ message: 'My Portfolio API' })
+})
+
+app.use('/projects', require('./routes/projects.routes'))
+
 async function start() {
   await connect(URI)
   
