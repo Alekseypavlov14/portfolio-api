@@ -1,4 +1,4 @@
-const { Router } = require('mongoose')
+const { Router } = require('express')
 const ContactsController = require('../controllers/contacts.controller')
 
 const router = Router()
