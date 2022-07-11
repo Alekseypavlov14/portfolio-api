@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const connect = require('./database/connect')
-const auth = require('./middlewares/auth.middleware')
+const auth = require('./middleware/auth.middleware')
 require('dotenv').config()
 
 const PORT = process.env.PORT || 5000
