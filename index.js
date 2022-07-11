@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
 
 app.use('/projects', require('./routes/projects.routes'))
 app.use('/project', auth, require('./routes/project.routes'))
+app.use('/auth', auth, require('./routes/auth.routes'))
 
 app.all('*', (req, res) => {
   res.json({ message: 'invalid url' })
