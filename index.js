@@ -1,11 +1,12 @@
 const express = require('express')
 const cors = require('cors')
-const app = express()
 const connect = require('./database/connect')
 require('dotenv').config()
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 5000
 const URI = process.env.URI
+
+const app = express()
 
 app.use(cors())
 
@@ -15,12 +16,12 @@ app.get('/', (req, res) => {
 
 app.use('/projects', require('./routes/projects.routes'))
 
-async function start() {
-  await connect(URI)
-  
-  app.listen(PORT, () => {
-    console.log(`Server is working on port ${PORT}`)
-  })
-}
+app.all('*', (req, res) => {
+  res.json({ message: 'invalid url' })
+})
 
-start()
+connect(URI)
+
+app.listen(PORT, () => {
+  console.log(`Server is working on port ${PORT}`)
+})

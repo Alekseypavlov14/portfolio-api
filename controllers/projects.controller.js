@@ -1,11 +1,11 @@
 const Project = require('./../models/Project')
 
-class ProjectController {
+class ProjectsController {
   async get(req, res) {
     const projects = await Project.find({})
 
-    return projects
+    return res.json({ projects })
   }
 }
 
-module.exports = new ProjectController()
+module.exports = new ProjectsController()
