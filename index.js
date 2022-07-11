@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors')
+const bodyParser = require('body-parser')
 const connect = require('./database/connect')
 require('dotenv').config()
 
@@ -8,6 +9,7 @@ const URI = process.env.URI
 
 const app = express()
 
+app.use(bodyParser())
 app.use(cors())
 
 app.get('/', (req, res) => {
@@ -15,6 +17,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/projects', require('./routes/projects.routes'))
+app.use('/project', require('./routes/project.routes'))
 
 app.all('*', (req, res) => {
   res.json({ message: 'invalid url' })
